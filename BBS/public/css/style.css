@@ -1,0 +1,7 @@
+ul > li {
+  display: flex;
+}
+
+ul > li > span {
+  margin-right: 1em;
+}

@@ -12,7 +12,7 @@ end
 
 get '/' do
   @title = "BBS"
-  # @comment = Comment.all
+  @comments = Comment.all
   erb :index
 end
 
@@ -26,5 +26,11 @@ post '/creates' do
   comment = Comment.new({name: name, text: text})
   comment.save
 
+  redirect '/'
+end
+
+delete '/destroy' do
+  comment = Comment.find(params[:id])
+  comment.destroy
   redirect '/'
 end
