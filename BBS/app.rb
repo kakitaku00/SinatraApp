@@ -12,25 +12,29 @@ end
 
 get '/' do
   @title = "BBS"
+  @comment = Comment.new
   @comments = Comment.all
   erb :index
 end
 
 post '/creates' do
-  puts ###### 以下データ ######
-  p params
+
+  @comments = Comment.all
 
   name = params[:name]
   text = params[:text]
 
-  comment = Comment.new({name: name, text: text})
-  comment.save
-
-  redirect '/'
+  @comment = Comment.new({name: name, text: text})
+  if @comment.save {
+    redirect '/'
+  }
+  else
+    erb :index
+  end
 end
 
 delete '/destroy' do
-  comment = Comment.find(params[:id])
-  comment.destroy
+  @comment = Comment.find(params[:id])
+  @comment.destroy
   redirect '/'
 end

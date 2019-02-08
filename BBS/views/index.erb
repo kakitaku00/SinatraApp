@@ -1,4 +1,11 @@
 <h1>BBS</h1>
+<% if @comment.errors.present? %>
+  <ul>
+    <% @comment.errors.full_messages.each do |comment| %>
+    <li><%= comment %></li>
+    <% end %>
+  </ul>
+<% end %>
 <form action="creates" method="post">
   <label for="name">
     <span>ニックネーム：</span><input id="name" type="text" name="name" size="10">
